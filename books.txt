@@ -1,0 +1,6 @@
+Python Programming,James Smith,450
+Data Structures,Robert Brown,500
+Computer Networks,Andrew Tan,400
+Machine Learning,David Lee,650
+Database Management,John Wilson,550
+Web Development,Sarah Miller,350
