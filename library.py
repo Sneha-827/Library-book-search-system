@@ -4,8 +4,13 @@ def search_book():
     file = open("books.txt", "r")
 
     found = False   #a variable to know if book is found or not.  Let's consider it as false at first
+    
+    # list to store related books
+    related=[]
 
+    #if the name matches the user entered name
     for line in file:
+        
         book = line.strip().split(",") #splits the sentece at "," and stores it in a list in order
 
         if book[0].lower() == name.lower():    #covert the text into lower so it wont affect the comparision
@@ -17,10 +22,17 @@ def search_book():
             found = True   # True if the book is found
             break
 
+        #if the name doesnt match but any of the keyword  matches (Partial match)
+        elif name.lower() in book[0].lower(): 
+            related.append(book[0])      
+
     file.close()
 
     if found == False:
         print("Book not found")
+        print("Related books:")
+        for i in related:
+            print("\t", i)
 
 #search book using author's name
 def search_author():
