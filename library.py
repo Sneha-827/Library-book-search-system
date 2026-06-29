@@ -17,12 +17,12 @@ def search_book():
             print("\nBook Found")
             print("Name:", book[0])
             print("Author:", book[1])
-            print("Price: ₹", book[2])
+            print("Price: Rs.", book[2])
 
             found = True   # True if the book is found
             break
 
-        #if the name doesnt match but any of the keyword  matches (Partial match)
+        #if the name doesnt match and any of the keyword  matches (Partial match)
         elif name.lower() in book[0].lower(): 
             related.append(book[0])      
 
@@ -49,16 +49,41 @@ def search_author():
             print("\nBook Found")
             print("Name:", book[0])
             print("Author:", book[1])
-            print("Price: ₹", book[2])
+            print("Price: Rs.", book[2])
+            print("\n")
 
             found = True
-            break
 
     file.close()
 
     if found == False:
         print("Book not found")
-            
+
+#Search book by the cost range
+def search_cost():
+    min_cost = int(input("Enter the minimum book cost: "))
+    max_cost = int(input("Enter the maximum book cost: "))
+
+    file = open("books.txt", "r")
+
+    found = False
+
+    print("\n Books that are in price range: ")
+    for line in file:
+        book = line.strip().split(",")
+
+        #the price in txt file is stored as string so we use int() to convert it into integer
+        amount = int(book[2])
+
+        if min_cost <= amount <= max_cost:
+            print(book[0], "-Rs.", book[2])
+            found=True
+
+    file.close()
+    
+    if found == False:
+        print("No books found in this price range")
+
 
 
 #displaying all available books
@@ -78,8 +103,9 @@ while True:
     print("\n--- Library Search System ---")
     print("1. Search Book by name of the book")
     print("2. Search Book by Author's name")
-    print("3. Display all the Books")
-    print("4. Exit")
+    print("3. Search Book by cost range")
+    print("4. Display all the Books")
+    print("5. Exit")
 
     choice = int(input("Enter choice: "))
 
@@ -90,9 +116,12 @@ while True:
         search_author()
 
     elif choice == 3:
-        display_books()
+        search_cost()
 
     elif choice == 4:
+        display_books()
+
+    elif choice == 5:
         print("Thank you")
         break
 
